@@ -13,6 +13,8 @@ namespace Arvore_Binaria
             arvore_Binaria.Inserir(20, 25, 'E');
             arvore_Binaria.Inserir(25, 27, 'E');
             arvore_Binaria.Inserir(20, 26, 'D');
+            arvore_Binaria.NumeroNos();
+            arvore_Binaria.AlturaNo(20);
         }
     }
 }

@@ -10,17 +10,12 @@ namespace Arvore_Binaria
     {
         private No Raiz { get; set; }
 
-        private No Encontrado { get; set; }
+        private No NoEncontrado { get; set; }
 
-        public Arvore_Binaria() 
+        public Arvore_Binaria()
         {
             Raiz = new No();
-            Encontrado = new No();
-        }
-
-        public No GetRaiz()
-        {
-            return Raiz;
+            NoEncontrado = new No();
         }
 
         public void Inserir(int? Pai, int valor, char TipoFilho)
@@ -34,19 +29,19 @@ namespace Arvore_Binaria
             }
 
             Buscar(valor);
-            if (Encontrado.GetValor() == valor)
+            if (NoEncontrado.GetValor() == valor)
             {
                 Console.WriteLine("O Nó a ser inserido já existe!");
                 return;
             }
 
             Buscar(Pai.Value);
-            if (TipoFilho == 'E' && Encontrado.TemFilhoEsq())
+            if (TipoFilho == 'E' && NoEncontrado.TemFilhoEsq())
             {
                 Console.WriteLine("Já possui filho esquerdo!");
                 return;
             }
-            if (TipoFilho == 'D' && Encontrado.TemFilhoDir())
+            if (TipoFilho == 'D' && NoEncontrado.TemFilhoDir())
             {
                 Console.WriteLine("Já possui filho direito!");
                 return;
@@ -54,16 +49,16 @@ namespace Arvore_Binaria
 
             if (TipoFilho == 'E')
             {
-                Encontrado.InserirFilhoEsq(new No(valor, Encontrado));
+                NoEncontrado.InserirFilhoEsq(new No(valor, NoEncontrado));
                 Console.WriteLine("Filho esquerdo inserido!");
             }
             if (TipoFilho == 'D')
             {
-                Encontrado.InserirFilhoDir(new No(valor, Encontrado));
+                NoEncontrado.InserirFilhoDir(new No(valor, NoEncontrado));
                 Console.WriteLine("Filho direito inserido!");
             }
 
-            Encontrado = new No();
+            NoEncontrado = new No();
         }
 
         public void Buscar(int NoProcurado)
@@ -77,7 +72,7 @@ namespace Arvore_Binaria
             {
                 if (NoProcurado.Equals(Inicio.GetValor()))
                 {
-                    Encontrado = Inicio;
+                    NoEncontrado = Inicio;
                 }
 
                 Buscar(Inicio.GetFilhoEsq(), NoProcurado);
@@ -88,32 +83,32 @@ namespace Arvore_Binaria
         public void Remover(int NoRemover)
         {
             Buscar(NoRemover);
-            if (Encontrado != null)
+            if (NoEncontrado != null)
             {
-                if (Encontrado.GetFilhoEsq() == null && Encontrado.GetFilhoDir() == null)
+                if (NoEncontrado.GetFilhoEsq() == null && NoEncontrado.GetFilhoDir() == null)
                 {
-                    Encontrado = null;
+                    NoEncontrado = null;
                     return;
                 }
 
-                if (Encontrado.GetFilhoEsq() != null && Encontrado.GetFilhoDir() != null)
+                if (NoEncontrado.GetFilhoEsq() != null && NoEncontrado.GetFilhoDir() != null)
                 {
                     Console.WriteLine("O nó não pode ser removido!");
                     return;
                 }
 
-                var noPai = Encontrado.GetPai();
+                var noPai = NoEncontrado.GetPai();
                 No filhoExistente;
-                if (Encontrado.GetFilhoEsq() != null)
+                if (NoEncontrado.GetFilhoEsq() != null)
                 {
-                    filhoExistente = Encontrado.GetFilhoEsq();
+                    filhoExistente = NoEncontrado.GetFilhoEsq();
                 }
                 else
                 {
-                    filhoExistente = Encontrado.GetFilhoDir();
+                    filhoExistente = NoEncontrado.GetFilhoDir();
                 }
 
-                if (noPai.GetFilhoEsq() == Encontrado)
+                if (noPai.GetFilhoEsq() == NoEncontrado)
                 {
                     noPai.InserirFilhoEsq(filhoExistente);
                 }
@@ -121,38 +116,62 @@ namespace Arvore_Binaria
                 {
                     noPai.InserirFilhoDir(filhoExistente);
                 }
+
+                NoEncontrado = new No();
             }
         }
 
-        public int Grau(No No)
+        public int Grau(int No)
         {
-            if (No.GetFilhoEsq() != null && No.GetFilhoDir() != null)
+            Buscar(No);
+            if (NoEncontrado.GetFilhoEsq() != null && NoEncontrado.GetFilhoDir() != null)
             {
                 return 2;
             }
-            if (No.GetFilhoEsq() != null || No.GetFilhoDir() != null)
+            if (NoEncontrado.GetFilhoEsq() != null || NoEncontrado.GetFilhoDir() != null)
             {
                 return 1;
             }
 
+            NoEncontrado = new No();
             return 0;
         }
 
-        //public int Profundidade(No No)
+        //public int Profundidade(int No)
         //{
-        //    if (Raiz == No)
-        //        return 0;
-
-        //    if (Raiz != null)
-        //    {
-        //        if (No.Equals(Raiz.GetValor()))
-        //        {
-        //            return Inicio;
-        //        }
-
-        //        Buscar(Inicio.GetFilhoEsq(), NoProcurado);
-        //        Buscar(Inicio.GetFilhoDir(), NoProcurado);
-        //    }
         //}
+
+        public void NumeroNos()
+        {
+            Console.WriteLine("Quantidade de nós: " + NumeroNos(Raiz));
+        }
+
+        private int NumeroNos(No Inicio)
+        {
+            if (Inicio == null)
+                return 0;
+            else
+                return (1 + NumeroNos(Inicio.GetFilhoEsq()) + NumeroNos(Inicio.GetFilhoDir()));
+        }
+
+        public void AlturaNo(int NoAltura)
+        {
+            Buscar(NoAltura);
+            Console.WriteLine("Altura do nó: " + AlturaNo(NoEncontrado));
+            NoEncontrado = new No();
+        }
+
+        private int AlturaNo(No NoAltura) 
+        {
+            if (NoAltura == null || (NoAltura.GetFilhoDir() == null && NoAltura.GetFilhoEsq() == null))
+                return 0;
+            else 
+            {
+                if (AlturaNo(NoAltura.GetFilhoEsq()) > AlturaNo(NoAltura.GetFilhoDir()))
+                    return (1 + AlturaNo(NoAltura.GetFilhoEsq()));
+                else
+                    return (1 + AlturaNo(NoAltura.GetFilhoDir()));
+            }
+        }
     }
 }

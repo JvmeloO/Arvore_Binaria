@@ -15,7 +15,7 @@ namespace Arvore_Binaria
             arvore_Binaria.Inserir(20, 26, 'D');
             arvore_Binaria.NumeroNos();
             arvore_Binaria.AlturaNo(25);
-            arvore_Binaria.Profundidade(25);
+            arvore_Binaria.Profundidade(27);
             //arvore_Binaria.Remover(25);
             arvore_Binaria.PrintarInOrdemPreOrdemPosOrdem();
             arvore_Binaria.InverterArvoreBinaria();

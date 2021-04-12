@@ -83,21 +83,31 @@ namespace Arvore_Binaria
         public void Remover(int NoRemover)
         {
             Buscar(NoRemover);
+            var noPai = NoEncontrado.GetPai();
             if (NoEncontrado != null)
             {
                 if (NoEncontrado.GetFilhoEsq() == null && NoEncontrado.GetFilhoDir() == null)
                 {
-                    NoEncontrado = null;
-                    return;
+                    if (noPai.GetFilhoEsq() == NoEncontrado)
+                    {
+                        noPai.InserirFilhoEsq(null);
+                        Console.WriteLine("\nNó removido!");
+                        return;
+                    }
+                    else
+                    {
+                        noPai.InserirFilhoDir(null);
+                        Console.WriteLine("\nNó removido!");
+                        return;
+                    }
                 }
 
                 if (NoEncontrado.GetFilhoEsq() != null && NoEncontrado.GetFilhoDir() != null)
                 {
-                    Console.WriteLine("O nó não pode ser removido!");
+                    Console.WriteLine("\nO nó não pode ser removido!");
                     return;
                 }
-
-                var noPai = NoEncontrado.GetPai();
+                
                 No filhoExistente;
                 if (NoEncontrado.GetFilhoEsq() != null)
                 {
@@ -109,16 +119,17 @@ namespace Arvore_Binaria
                 }
 
                 if (noPai.GetFilhoEsq() == NoEncontrado)
-                {
+                {                    
                     noPai.InserirFilhoEsq(filhoExistente);
+                    Console.WriteLine("\nNó removido!");
                 }
                 else
-                {
+                {                    
                     noPai.InserirFilhoDir(filhoExistente);
-                }
-
-                NoEncontrado = new No();
+                    Console.WriteLine("\nNó removido!");
+                }                
             }
+            NoEncontrado = new No();
         }
 
         public int Grau(int No)
@@ -137,27 +148,40 @@ namespace Arvore_Binaria
             return 0;
         }
 
-        //public int Profundidade(int No)
-        //{
-        //}
+        public void Profundidade(int No)
+        {
+            Buscar(No);
+            Console.WriteLine("\nProfundidade do nó: " + Pronfundidade(NoEncontrado));
+            NoEncontrado = new No();
+        }
+
+        private int Pronfundidade(No NoProfundidade)
+        {
+            if (NoProfundidade == Raiz)
+            {
+                return 0;
+            }
+
+            return (1 + Pronfundidade(NoProfundidade.GetPai()));
+        }
 
         public void NumeroNos()
         {
-            Console.WriteLine("Quantidade de nós: " + NumeroNos(Raiz));
+            Console.WriteLine("\nQuantidade de nós: " + NumeroNos(Raiz));
         }
 
         private int NumeroNos(No Inicio)
         {
             if (Inicio == null)
                 return 0;
-            else
-                return (1 + NumeroNos(Inicio.GetFilhoEsq()) + NumeroNos(Inicio.GetFilhoDir()));
+
+            return (1 + NumeroNos(Inicio.GetFilhoEsq()) + NumeroNos(Inicio.GetFilhoDir()));
         }
 
         public void AlturaNo(int NoAltura)
         {
             Buscar(NoAltura);
-            Console.WriteLine("Altura do nó: " + AlturaNo(NoEncontrado));
+            Console.WriteLine("\nAltura do nó: " + AlturaNo(NoEncontrado));
             NoEncontrado = new No();
         }
 
@@ -165,13 +189,60 @@ namespace Arvore_Binaria
         {
             if (NoAltura == null || (NoAltura.GetFilhoDir() == null && NoAltura.GetFilhoEsq() == null))
                 return 0;
-            else 
+
+            if (AlturaNo(NoAltura.GetFilhoEsq()) > AlturaNo(NoAltura.GetFilhoDir()))
+                return (1 + AlturaNo(NoAltura.GetFilhoEsq()));
+            else
+                return (1 + AlturaNo(NoAltura.GetFilhoDir()));
+        }
+
+        public void PrintarInOrdemPreOrdemPosOrdem() 
+        {
+            Console.WriteLine("\nIn Ordem:");
+            InOrdem(Raiz);
+            Console.WriteLine("\nPre Ordem:");
+            PreOrdem(Raiz);
+            Console.WriteLine("\nPos Ordem:");
+            PosOrdem(Raiz);
+        }
+
+        private void InOrdem(No Inicio)
+        {
+            if (Inicio != null)
             {
-                if (AlturaNo(NoAltura.GetFilhoEsq()) > AlturaNo(NoAltura.GetFilhoDir()))
-                    return (1 + AlturaNo(NoAltura.GetFilhoEsq()));
-                else
-                    return (1 + AlturaNo(NoAltura.GetFilhoDir()));
+                InOrdem(Inicio.GetFilhoEsq());
+                Console.Write(Inicio.GetValor() + " ");
+                InOrdem(Inicio.GetFilhoDir());
             }
+        }
+
+        private void PreOrdem(No Inicio) 
+        {
+            if (Inicio != null)
+            {
+                Console.Write(Inicio.GetValor() + " ");
+                InOrdem(Inicio.GetFilhoEsq());                
+                InOrdem(Inicio.GetFilhoDir());
+            }
+        }
+
+        private void PosOrdem(No Inicio) 
+        {
+            if (Inicio != null)
+            {
+                InOrdem(Inicio.GetFilhoEsq());               
+                InOrdem(Inicio.GetFilhoDir());
+                Console.Write(Inicio.GetValor() + " ");
+            }
+        }
+
+        public void InverterArvoreBinaria() 
+        {
+            Console.WriteLine("\n\nInvertendo Arvore...");
+            No filhoEsq = Raiz.GetFilhoEsq();
+            No filhoDir = Raiz.GetFilhoDir();
+            Raiz.InserirFilhoEsq(filhoDir);
+            Raiz.InserirFilhoDir(filhoEsq);
         }
     }
 }

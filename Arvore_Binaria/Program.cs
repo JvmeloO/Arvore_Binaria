@@ -19,7 +19,7 @@ namespace Arvore_Binaria
             ////arvore_Binaria.Remover(25);
             //arvore_Binaria.PrintarInOrdemPreOrdemPosOrdem();
             //arvore_Binaria.InverterArvoreBinaria();
-            //arvore_Binaria.PrintarInOrdemPreOrdemPosOrdem();
+            arvore_Binaria.PrintarInOrdemPreOrdemPosOrdem();
             var arvoreInOrdem = arvore_Binaria.ArvorePercursoInOrdem();
             arvore_Binaria.PrintarArvorePercursoInOrdemPreOrdemPosOrdem(arvoreInOrdem);
         }

@@ -27,6 +27,14 @@ namespace Arvore_Binaria
             FilhoDir = FilhoEsq = null;
         }
 
+        public No(int Valor, No Pai, No FilhoEsq, No FilhoDir)
+        {
+            this.Valor = Valor;
+            this.Pai = Pai;
+            this.FilhoDir = FilhoDir;
+            this.FilhoEsq = FilhoEsq;
+        }
+
         public No GetFilhoDir() 
         {
             return FilhoDir;

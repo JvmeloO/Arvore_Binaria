@@ -13,13 +13,15 @@ namespace Arvore_Binaria
             arvore_Binaria.Inserir(20, 25, 'E');
             arvore_Binaria.Inserir(25, 27, 'E');
             arvore_Binaria.Inserir(20, 26, 'D');
-            arvore_Binaria.NumeroNos();
-            arvore_Binaria.AlturaNo(25);
-            arvore_Binaria.Profundidade(27);
-            //arvore_Binaria.Remover(25);
-            arvore_Binaria.PrintarInOrdemPreOrdemPosOrdem();
-            arvore_Binaria.InverterArvoreBinaria();
-            arvore_Binaria.PrintarInOrdemPreOrdemPosOrdem();            
+            //arvore_Binaria.NumeroNos();
+            //arvore_Binaria.AlturaNo(25);
+            //arvore_Binaria.Profundidade(27);
+            ////arvore_Binaria.Remover(25);
+            //arvore_Binaria.PrintarInOrdemPreOrdemPosOrdem();
+            //arvore_Binaria.InverterArvoreBinaria();
+            //arvore_Binaria.PrintarInOrdemPreOrdemPosOrdem();
+            var arvoreInOrdem = arvore_Binaria.ArvorePercursoInOrdem();
+            arvore_Binaria.PrintarArvorePercursoInOrdemPreOrdemPosOrdem(arvoreInOrdem);
         }
     }
 }

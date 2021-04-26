@@ -231,7 +231,7 @@ namespace Arvore_Binaria
             return Arvore_Percurso_Retorno;
         }
 
-        public void PrintarInOrdemPreOrdemPosOrdem()
+        public void PrintInOrdemPreOrdemPosOrdem()
         {
             Console.WriteLine("\nIn Ordem:");
             InOrdem(Raiz);
@@ -298,44 +298,44 @@ namespace Arvore_Binaria
             }
         }
 
-        public void PrintarArvorePercursoInOrdemPreOrdemPosOrdem(List<No> Arvore_Percurso) 
+        public void PrintArvorePercursoInOrdemPreOrdemPosOrdem(List<No> Arvore_Percurso) 
         {
             EncontrarRaiz(Arvore_Percurso.FirstOrDefault());
             Console.WriteLine("\n\nArvore Percurso In Ordem:");
-            PrintarArvorePercursoInOrdem(RaizEncontrada);
+            PrintArvorePercursoInOrdem(RaizEncontrada);
             Console.WriteLine("\nArvore Percurso Pre Ordem:");
-            PrintarArvorePercursoPreOrdem(RaizEncontrada);
+            PrintArvorePercursoPreOrdem(RaizEncontrada);
             Console.WriteLine("\nArvore Percurso Pos Ordem:");
-            PrintarArvorePercursoPosOrdem(RaizEncontrada);
+            PrintArvorePercursoPosOrdem(RaizEncontrada);
             RaizEncontrada = null;
         }
 
-        private void PrintarArvorePercursoInOrdem(No Inicio)
+        private void PrintArvorePercursoInOrdem(No Inicio)
         {
             if (Inicio != null)
             {
-                PrintarArvorePercursoInOrdem(Inicio.GetFilhoEsq());
+                PrintArvorePercursoInOrdem(Inicio.GetFilhoEsq());
                 Console.Write(Inicio.GetValor() + " ");
-                PrintarArvorePercursoInOrdem(Inicio.GetFilhoDir());
+                PrintArvorePercursoInOrdem(Inicio.GetFilhoDir());
             }
         }
 
-        private void PrintarArvorePercursoPreOrdem(No Inicio)
+        private void PrintArvorePercursoPreOrdem(No Inicio)
         {
             if (Inicio != null)
             {
                 Console.Write(Inicio.GetValor() + " ");
-                PrintarArvorePercursoPreOrdem(Inicio.GetFilhoEsq());
-                PrintarArvorePercursoPreOrdem(Inicio.GetFilhoDir());
+                PrintArvorePercursoPreOrdem(Inicio.GetFilhoEsq());
+                PrintArvorePercursoPreOrdem(Inicio.GetFilhoDir());
             }
         }
 
-        private void PrintarArvorePercursoPosOrdem(No Inicio)
+        private void PrintArvorePercursoPosOrdem(No Inicio)
         {
             if (Inicio != null)
             {
-                PrintarArvorePercursoPosOrdem(Inicio.GetFilhoEsq());
-                PrintarArvorePercursoPosOrdem(Inicio.GetFilhoDir());
+                PrintArvorePercursoPosOrdem(Inicio.GetFilhoEsq());
+                PrintArvorePercursoPosOrdem(Inicio.GetFilhoDir());
                 Console.Write(Inicio.GetValor() + " ");
             }
         }

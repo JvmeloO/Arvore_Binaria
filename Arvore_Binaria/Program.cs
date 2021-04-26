@@ -17,11 +17,11 @@ namespace Arvore_Binaria
             //arvore_Binaria.AlturaNo(25);
             //arvore_Binaria.Profundidade(27);
             ////arvore_Binaria.Remover(25);
-            //arvore_Binaria.PrintarInOrdemPreOrdemPosOrdem();
+            //arvore_Binaria.PrintInOrdemPreOrdemPosOrdem();
             //arvore_Binaria.InverterArvoreBinaria();
-            arvore_Binaria.PrintarInOrdemPreOrdemPosOrdem();
+            arvore_Binaria.PrintInOrdemPreOrdemPosOrdem();
             var arvoreInOrdem = arvore_Binaria.ArvorePercursoInOrdem();
-            arvore_Binaria.PrintarArvorePercursoInOrdemPreOrdemPosOrdem(arvoreInOrdem);
+            arvore_Binaria.PrintArvorePercursoInOrdemPreOrdemPosOrdem(arvoreInOrdem);
             arvore_Binaria.MenoresValores();
         }
     }

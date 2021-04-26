@@ -22,6 +22,7 @@ namespace Arvore_Binaria
             arvore_Binaria.PrintarInOrdemPreOrdemPosOrdem();
             var arvoreInOrdem = arvore_Binaria.ArvorePercursoInOrdem();
             arvore_Binaria.PrintarArvorePercursoInOrdemPreOrdemPosOrdem(arvoreInOrdem);
+            arvore_Binaria.MenoresValores();
         }
     }
 }

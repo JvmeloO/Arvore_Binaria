@@ -16,6 +16,9 @@ namespace Arvore_Binaria
 
         private No RaizEncontrada { get; set; }
 
+        private int MediaValoresArvore = 0;
+        private int SomaValoresArvore = 0;
+
         public Arvore_Binaria()
         {
             Raiz = new No();
@@ -334,6 +337,40 @@ namespace Arvore_Binaria
                 PrintarArvorePercursoPosOrdem(Inicio.GetFilhoEsq());
                 PrintarArvorePercursoPosOrdem(Inicio.GetFilhoDir());
                 Console.Write(Inicio.GetValor() + " ");
+            }
+        }
+
+        public void MenoresValores()
+        {
+            MediaValores(Raiz);
+            Console.WriteLine("\n\nMenores valores da arvore: ");
+            MenoresValores(Raiz, MediaValoresArvore);            
+            SomaValoresArvore = 0;
+            MediaValoresArvore = 0;
+        }
+
+        private void MediaValores(No Inicio) 
+        {
+            if (Inicio != null)
+            {
+                SomaValoresArvore = SomaValoresArvore + Inicio.GetValor();
+
+                MediaValores(Inicio.GetFilhoEsq());                
+                MediaValores(Inicio.GetFilhoDir());
+            }
+
+            MediaValoresArvore = SomaValoresArvore / NumeroNos(Raiz);            
+        }
+
+        private void MenoresValores(No Inicio, int media) 
+        {
+            if (Inicio != null)
+            {
+                if (Inicio.GetValor() < media)
+                    Console.Write(Inicio.GetValor() + " ");
+
+                MenoresValores(Inicio.GetFilhoEsq(), media);
+                MenoresValores(Inicio.GetFilhoDir(), media);
             }
         }
     }

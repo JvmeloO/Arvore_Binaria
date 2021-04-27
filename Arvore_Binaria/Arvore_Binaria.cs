@@ -18,6 +18,7 @@ namespace Arvore_Binaria
 
         private int MediaValoresArvore = 0;
         private int SomaValoresArvore = 0;
+        private bool EstritamenteBinaria = true;
 
         public Arvore_Binaria()
         {
@@ -353,7 +354,7 @@ namespace Arvore_Binaria
         {
             if (Inicio != null)
             {
-                SomaValoresArvore = SomaValoresArvore + Inicio.GetValor();
+                SomaValoresArvore += Inicio.GetValor();
 
                 MediaValores(Inicio.GetFilhoEsq());                
                 MediaValores(Inicio.GetFilhoDir());
@@ -371,6 +372,30 @@ namespace Arvore_Binaria
 
                 MenoresValores(Inicio.GetFilhoEsq(), media);
                 MenoresValores(Inicio.GetFilhoDir(), media);
+            }
+        }
+
+
+        public void ArvoreEstritamenteBinaria()
+        {
+            ArvoreEstritamenteBinaria(Raiz);
+            if (EstritamenteBinaria)
+                Console.WriteLine("\n\nArvore Estritamente Binaria!");
+            else
+                Console.WriteLine("\n\nArvore nao Estritamente Binaria!");
+            EstritamenteBinaria = true;
+        }
+
+        private void ArvoreEstritamenteBinaria(No Inicio) 
+        {
+            if (Inicio != null)
+            {
+                if (Inicio.GetPai() != null)
+                    if (Inicio.GetPai().GetFilhoEsq() == null || Inicio.GetPai().GetFilhoDir() == null)
+                        EstritamenteBinaria = false;
+
+                ArvoreEstritamenteBinaria(Inicio.GetFilhoEsq());
+                ArvoreEstritamenteBinaria(Inicio.GetFilhoDir());
             }
         }
     }

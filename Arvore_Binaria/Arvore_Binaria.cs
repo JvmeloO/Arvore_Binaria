@@ -398,5 +398,38 @@ namespace Arvore_Binaria
                 ArvoreEstritamenteBinaria(Inicio.GetFilhoDir());
             }
         }
+
+        public void PaiMaiorFilho() 
+        {
+            Console.WriteLine("\nPais e maiores Filhos: ");
+            PaiMaiorFilho(Raiz, new List<No>());
+        }
+
+        private void PaiMaiorFilho(No Inicio, List<No> PaisTestados) 
+        {
+            if (Inicio != null)
+            {
+                if (Inicio.GetPai() != null && !(PaisTestados.Contains(Inicio.GetPai())))
+                {
+                    PaisTestados.Add(Inicio.GetPai());
+                    Console.Write("Pai: " + Inicio.GetPai().GetValor() + " - ");
+
+                    if (Inicio.GetPai().GetFilhoEsq() == null && Inicio.GetPai().GetFilhoDir() != null)
+                        Console.Write("Maior Filho: " + Inicio.GetPai().GetFilhoDir().GetValor() + "\n");
+
+                    if (Inicio.GetPai().GetFilhoDir() == null && Inicio.GetPai().GetFilhoEsq() != null)
+                        Console.Write("Maior Filho: " + Inicio.GetPai().GetFilhoEsq().GetValor() + "\n");
+
+                    if (Inicio.GetPai().GetFilhoEsq() != null && Inicio.GetPai().GetFilhoDir() != null)
+                        if (Inicio.GetPai().GetFilhoEsq().GetValor() > Inicio.GetPai().GetFilhoDir().GetValor())
+                            Console.Write("Maior Filho: " + Inicio.GetPai().GetFilhoEsq().GetValor() + "\n");
+                        else
+                            Console.Write("Maior Filho: " + Inicio.GetPai().GetFilhoDir().GetValor() + "\n");
+                }
+
+                PaiMaiorFilho(Inicio.GetFilhoEsq(), PaisTestados);
+                PaiMaiorFilho(Inicio.GetFilhoDir(), PaisTestados);
+            }
+        }
     }
 }

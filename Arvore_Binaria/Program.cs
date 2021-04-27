@@ -29,6 +29,7 @@ namespace Arvore_Binaria
             arvore_Binaria.PrintArvorePercursoInOrdemPreOrdemPosOrdem(arvoreInOrdem);
             arvore_Binaria.MenoresValores();
             arvore_Binaria.ArvoreEstritamenteBinaria();
+            arvore_Binaria.PaiMaiorFilho();
         }
     }
 }

@@ -399,13 +399,13 @@ namespace Arvore_Binaria
             }
         }
 
-        public void PaiMaiorFilho() 
+        public void PaisMaioresFilhos() 
         {
             Console.WriteLine("\nPais e maiores Filhos: ");
-            PaiMaiorFilho(Raiz, new List<No>());
+            PaisMaioresFilhos(Raiz, new List<No>());
         }
 
-        private void PaiMaiorFilho(No Inicio, List<No> PaisTestados) 
+        private void PaisMaioresFilhos(No Inicio, List<No> PaisTestados) 
         {
             if (Inicio != null)
             {
@@ -427,8 +427,8 @@ namespace Arvore_Binaria
                             Console.Write("Maior Filho: " + Inicio.GetPai().GetFilhoDir().GetValor() + "\n");
                 }
 
-                PaiMaiorFilho(Inicio.GetFilhoEsq(), PaisTestados);
-                PaiMaiorFilho(Inicio.GetFilhoDir(), PaisTestados);
+                PaisMaioresFilhos(Inicio.GetFilhoEsq(), PaisTestados);
+                PaisMaioresFilhos(Inicio.GetFilhoDir(), PaisTestados);
             }
         }
     }
